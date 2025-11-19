@@ -42,7 +42,7 @@ INSERT INTO translations (page, lang, key, value) VALUES
 
 INSERT INTO translations (page, lang, key, value) VALUES
 ('terms', 'en', 'terms_title', 'Terms'),
-('terms', 'en', 'terms_close_button', 'Close and Go Back'),
+('terms', 'en', 'terms_close_button', 'Close Terms and Return to Login'),
 ('terms', 'en', 'terms_content', 'BY clicking Invoice Now, you choose to register according to the information that you have typed in and the text on the registration page and the terms here, and you at the same time accept the terms here.
 
 You can use the program FOR FREE for 14 days.
@@ -93,7 +93,7 @@ Our experience is that our customers are very satisfied with the way we work and
 
 Have a great day!'),
 ('terms', 'se', 'terms_title', 'Villkor'),
-('terms', 'se', 'terms_close_button', 'Stäng och gå tillbaka'),
+('terms', 'se', 'terms_close_button', 'Stäng villkor och återvänd till inloggning'),
 ('terms', 'se', 'terms_content', 'GENOM ATT klicka på Fakturera Nu så väljer ni att registrera enligt den information som ni har lagt in och texten på registrerings sidan och villkoren här, och accepterar samtidigt villkoren här.
 
 Ni kan använda programmet GRATIS i 14 dagar.
