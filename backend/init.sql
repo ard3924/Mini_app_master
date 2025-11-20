@@ -38,7 +38,9 @@ INSERT INTO translations (page, lang, key, value) VALUES
 ('login', 'se', 'password', 'Lösenord'),
 ('login', 'se', 'login_button', 'Logga in'),
 ('login', 'se', 'forgot_password', 'Glömt lösenord?'),
-('login', 'se', 'register', 'Registrera');
+('login', 'se', 'register', 'Registrera'),
+('login', 'en', 'terms_title', 'Terms'),
+('login', 'se', 'terms_title', 'Villkor');
 
 INSERT INTO translations (page, lang, key, value) VALUES
 ('terms', 'en', 'terms_title', 'Terms'),
@@ -142,10 +144,17 @@ Klicka på Fakturera Nu för att registrera i enlighet med den information som n
 
 Vår erfarenhet är att våra kunder är mycket nöjda med sättet vi arbetar på och vi hoppas och tror att det också kommer att bli er upplevelse.
 
-Ha en trevlig dag!');
+Ha en trevlig dag!'),
+('login', 'en', 'pricelist', 'Pricelist'),
+('login', 'se', 'pricelist', 'Prislista'),
+('login', 'en', 'login_alert', 'Please login to access the pricelist.'),
+('login', 'se', 'login_alert', 'Vänligen logga in för att komma åt prislistan.'),
+('terms', 'en', 'pricelist', 'Pricelist'),
+('terms', 'se', 'pricelist', 'Prislista'),
+('terms', 'en', 'login_alert', 'Please login to access the pricelist.'),
+('terms', 'se', 'login_alert', 'Vänligen logga in för att komma åt prislistan.');
 
-
-INSERT INTO users (username, password) VALUES ('admin', '$2a$10$examplehashedpassword'); 
+INSERT INTO users (username, password) VALUES ('admin', '$2a$10$examplehashedpassword');
 
 INSERT INTO pricelist (product_service, in_price, price, quantity, total) VALUES
 ('Product 1', 10.00, 15.00, 1, 15.00),

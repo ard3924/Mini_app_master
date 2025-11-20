@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axiosInstance from '../axiosinterceptor';
@@ -49,22 +48,24 @@ function LoginPage() {
         </div>
         <nav className="nav-links">
           <Link to="/terms">{texts.terms_title || 'Terms'}</Link>
-          <Link to="#">{texts.register || 'Register'}</Link>
+          <Link to="#" onClick={(e) => { e.preventDefault(); alert(texts.login_alert || 'Please login to access the pricelist.'); }}>{texts.pricelist || 'Pricelist'}</Link>
         </nav>
-        <div className="lang-flags">
-          <img src="https://storage.123fakturere.no/public/flags/SE.png" alt="Swedish" onClick={() => setLang('se')} style={{ cursor: 'pointer' }} />
-          <img src="https://storage.123fakturere.no/public/flags/GB.png" alt="English" onClick={() => setLang('en')} style={{ cursor: 'pointer' }} />
-        </div>
-        <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <span></span>
-          <span></span>
-          <span></span>
+        <div className="header-right">
+          <div className="lang-flags">
+            <img src="https://storage.123fakturere.no/public/flags/SE.png" alt="Swedish" onClick={() => setLang('se')} style={{ cursor: 'pointer' }} />
+            <img src="https://storage.123fakturere.no/public/flags/GB.png" alt="English" onClick={() => setLang('en')} style={{ cursor: 'pointer' }} />
+          </div>
+          <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </header>
       {isMenuOpen && (
         <div className="hamburger-menu">
           <Link to="/terms">{texts.terms_title || 'Terms'}</Link>
-          <Link to="#">{texts.register || 'Register'}</Link>
+          <Link to="#" onClick={(e) => { e.preventDefault(); alert(texts.login_alert || 'Please login to access the pricelist.'); }}>{texts.pricelist || 'Pricelist'}</Link>
         </div>
       )}
       <div className="login-container">
@@ -91,7 +92,6 @@ function LoginPage() {
           {error && <p className="error-message">{error}</p>}
           <button type="submit">{texts.login_button}</button>
         </form>
-        <p className="forgot-password"><Link to="#">{texts.forgot_password}</Link></p>
       </div>
     </div>
   );

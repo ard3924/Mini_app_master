@@ -1,6 +1,129 @@
-.pricelist-page {
-  padding: 20px;
+.pricelist-page-wrapper {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
   font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.pricelist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  height: 40px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  color: #007bff;
+}
+
+.nav-links button {
+  background: none;
+  border: none;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-links button:hover {
+  color: #007bff;
+}
+
+.lang-flags img {
+  height: 24px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+.hamburger-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.hamburger-menu a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.hamburger-menu a:hover {
+  color: #007bff;
+}
+
+.hamburger-menu button {
+  background: none;
+  border: none;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hamburger-menu button:hover {
+  color: #007bff;
+}
+
+.pricelist-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.pricelist-page {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 1200px;
 }
 
 .pricelist-page h1 {
@@ -16,7 +139,8 @@ table {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -42,55 +166,131 @@ button {
   cursor: pointer;
 }
 
+.back-button {
+  padding: 3px 6px;
+  font-size: 12px;
+}
+
 button:hover {
   background-color: #218838;
 }
 
-/* media queries for mobile viewss*/
+/* Mobile portrait */
 @media (max-width: 480px) and (orientation: portrait) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .header-right .nav-links {
+    display: flex;
+  }
+
   .pricelist-page {
     padding: 10px;
   }
+
   table {
     font-size: 14px;
   }
-  th, td {
+
+  th,
+  td {
     padding: 5px;
+  }
+
+  table {
+    border: 0;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table tr {
+    display: block;
+    margin-bottom: 2em;
+    border-bottom: 2px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #fff;
+  }
+
+  table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    border-bottom: 1px dotted #ccc;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 10px;
   }
 }
 
+/* Mobile landscape */
 @media (max-width: 768px) and (orientation: landscape) {
   .pricelist-page {
     padding: 10px;
   }
+
   table {
     font-size: 12px;
   }
-  th, td {
+
+  th,
+  td {
     padding: 5px;
   }
 
-  th:nth-child(2), td:nth-child(2),
-  th:nth-child(4), td:nth-child(4) {
+  th:nth-child(2),
+  td:nth-child(2),
+  th:nth-child(4),
+  td:nth-child(4) {
     display: none;
   }
 }
 
-/*media queries for Tablet viewss */
+/* Tablet */
 @media (min-width: 769px) and (max-width: 1024px) {
+  .hamburger {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
+
   .pricelist-page {
     padding: 15px;
   }
+
   table {
     font-size: 14px;
   }
- 
-  th:nth-child(4), td:nth-child(4) {
+
+
+  th:nth-child(4),
+  td:nth-child(4) {
     display: none;
   }
 }
 
-/*media queries for Desktop veiwss */
+/* Desktop */
 @media (min-width: 1025px) {
   table {
     max-width: 1200px;
