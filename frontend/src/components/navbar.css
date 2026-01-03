@@ -39,14 +39,14 @@
   cursor: pointer;
 }
 
-.navbar-right .hamburger {
+.hamburger {
   display: none;
   flex-direction: column;
   cursor: pointer;
   padding: 5px;
 }
 
-.navbar-right .hamburger span {
+.hamburger span {
   width: 25px;
   height: 3px;
   background-color: #333;
@@ -58,7 +58,7 @@
   display: none;
   position: absolute;
   top: 60px;
-  right: 20px;
+  left : 20px;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -85,8 +85,16 @@
     display: none;
   }
 
-  .navbar-right .hamburger {
+  .navbar-logo {
+    display: none;
+  }
+
+  .hamburger {
     display: flex;
+  }
+
+  .hamburger span {
+    background-color: #fff;
   }
 
   .hamburger-menu {

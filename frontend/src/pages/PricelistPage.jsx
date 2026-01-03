@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axiosinterceptor';
-import './Login.css';
 import './Pricelist.css';
-import '../components/navbar.css';
-import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
-function PricelistPage() {
-  const [pricelist, setPricelist] = useState([]);
+export default function PricelistPage() {
+  const [items, setItems] = useState([]);
   const [editing, setEditing] = useState({});
-  const [lang, setLang] = useState('se');
-  const [texts, setTexts] = useState({});
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+
+  const fetchItems = async () => {
+    const res = await axiosInstance.get('/pricelist');
+    setItems(res.data);
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('jwt_token');
@@ -20,131 +20,179 @@ function PricelistPage() {
       navigate('/login');
       return;
     }
-    fetchPricelist();
+    fetchItems();
+  }, []);
 
-    const fetchTranslations = async () => {
-      try {
-        const response = await axiosInstance.get(`/translations/login/${lang}`);
-        setTexts(response.data);
-      } catch (error) {
-        console.error('Failed to fetch translations:', error);
-      }
-    };
-    fetchTranslations();
-
-  }, [navigate]);
-
-  const fetchPricelist = async () => {
-    try {
-      const response = await axiosInstance.get('/pricelist');
-      setPricelist(response.data);
-    } catch (error) {
-      console.error('Failed to fetch pricelist:', error);
-    }
+  const onChange = (id, field, value) => {
+    setEditing(p => ({ ...p, [id]: { ...p[id], [field]: value } }));
   };
 
-  const handleEdit = (id, field, value) => {
-    setEditing(prev => ({
-      ...prev,
-      [id]: { ...prev[id], [field]: value }
-    }));
-  };
-
-  const handleSave = async (id) => {
-    const data = editing[id];
-    try {
-      await axiosInstance.put(`/pricelist/${id}`, data);
-      alert('Product saved successfully!');
-      setEditing(prev => {
-        const newEditing = { ...prev };
-        delete newEditing[id];
-        return newEditing;
-      });
-      fetchPricelist();
-    } catch (error) {
-      console.error('Failed to update item:', error);
-      alert('Failed to save product. Please try again.');
-    }
+  const onBlur = async (id) => {
+    if (!editing[id]) return;
+    await axiosInstance.put(`/pricelist/${id}`, editing[id]);
+    fetchItems();
   };
 
   return (
-    <div className="pricelist-page-wrapper" style={{ backgroundImage: `url('https://storage.123fakturere.no/public/wallpapers/sverige43.jpg')` }}>
-      <Navbar
-        navContent={
-          <a href="#" onClick={() => { localStorage.removeItem('jwt_token'); navigate('/login'); }}>Logout</a>
-        }
-        rightContent={
-          <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <span></span>
-            <span></span>
-            <span></span>
+    <div className="app-shell">
+
+      {/* TOP NAVBAR */}
+      <header className="topbar">
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div className="user-info">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            alt="user"
+            width="42"
+            height="42"
+            className="avatar"
+          />
+          <div>
+            <div className="username">John Andre</div>
+            <div className="company">Storfjord AS</div>
           </div>
-        }
-      />
-      {isMenuOpen && (
-        <div className="hamburger-menu">
-          <a href="#" onClick={() => { localStorage.removeItem('jwt_token'); navigate('/login'); }}>Logout</a>
+        </div>
+
+        <div className="lang">
+          English
+          <img
+             src="https://storage.123fakturere.no/public/flags/GB.png"
+          alt="lang"
+          />
+        </div>
+      </header>
+
+      {menuOpen && (
+        <div className="mobile-menu" onClick={() => setMenuOpen(false)}>
+          <div className="user-info-mobile" onClick={(e) => e.stopPropagation()}>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              alt="user"
+              width="42"
+              height="42"
+              className="avatar"
+            />
+            <div>
+              <div className="username">John Andre</div>
+              <div className="company">Storfjord AS</div>
+            </div>
+          </div>
+
+          <div className="menu-items-mobile" onClick={(e) => e.stopPropagation()}>
+            {[
+              'Price List',
+            ].map(item => (
+              <div
+                key={item}
+                className={`menu-item ${item === 'Price List' ? 'active' : ''}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item}
+              </div>
+            ))}
+
+            <div
+              className="menu-item logout"
+              onClick={(e) => {
+                e.stopPropagation();
+                setMenuOpen(false);
+                localStorage.removeItem('jwt_token');
+                navigate('/login');
+              }}
+            >
+              Log out
+            </div>
+          </div>
         </div>
       )}
-      <div className="pricelist-container">
-        <div className="pricelist-page">
-          <h1>Pricelist</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Product/Service</th>
-                <th>In Price</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pricelist.map(item => (
-                <tr key={item.id}>
-                  <td data-label="Product/Service">
-                    <input
-                      type="text"
-                      value={editing[item.id]?.product_service ?? item.product_service}
-                      onChange={(e) => handleEdit(item.id, 'product_service', e.target.value)}
-                    />
-                  </td>
-                  <td data-label="In Price">
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={editing[item.id]?.in_price ?? item.in_price}
-                      onChange={(e) => handleEdit(item.id, 'in_price', e.target.value)}
-                    />
-                  </td>
-                  <td data-label="Price">
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={editing[item.id]?.price ?? item.price}
-                      onChange={(e) => handleEdit(item.id, 'price', e.target.value)}
-                    />
-                  </td>
-                  <td data-label="Quantity">
-                    <input
-                      type="number"
-                      value={editing[item.id]?.quantity ?? item.quantity}
-                      onChange={(e) => handleEdit(item.id, 'quantity', e.target.value)}
-                    />
-                  </td>
-                  <td data-label="Total">{((editing[item.id]?.price ?? item.price) * (editing[item.id]?.quantity ?? item.quantity)).toFixed(2)}</td>
-                  <td data-label="Actions">
-                    <button onClick={() => handleSave(item.id)}>Save</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+
+      <div className="body">
+
+        {/* SIDEBAR */}
+        <aside className="sidebar">
+          <h4>Menu</h4>
+
+          {[
+            'Price List',
+          ].map(item => (
+            <div
+              key={item}
+              className={`menu-item ${item === 'Price List' ? 'active' : ''}`}
+            >
+              {item}
+            </div>
+          ))}
+
+          <div
+            className="menu-item logout"
+            onClick={() => {
+              localStorage.removeItem('jwt_token');
+              navigate('/login');
+            }}
+          >
+            Log out
+          </div>
+        </aside>
+
+        {/* MAIN CONTENT */}
+        <main className="content">
+
+          {/* SEARCH + ACTIONS */}
+          <div className="toolbar">
+            <div className="search-group">
+              <input placeholder="Search Article No..." />
+              <input placeholder="Search Product..." />
+            </div>
+
+            <div className="actions">
+              <button className="pill green">New Product</button>
+              <button className="pill">Print List</button>
+              <button className="pill toggle">Advanced mode</button>
+            </div>
+          </div>
+
+          {/* TABLE */}
+          <div className="table">
+            <div className="thead">
+              <span>Article No</span>
+              <span>Product/Service</span>
+              <span>In Price</span>
+              <span>Price</span>
+              <span>Unit</span>
+              <span>In Stock</span>
+              <span>Description</span>
+              <span></span>
+            </div>
+
+            {items.map(item => (
+              <div className="row spaced" key={item.id}>
+                <input value={item.id} disabled />
+                <input
+                  value={editing[item.id]?.product_service ?? item.product_service}
+                  onChange={e => onChange(item.id, 'product_service', e.target.value)}
+                  onBlur={() => onBlur(item.id)}
+                />
+                <input value={item.in_price} readOnly />
+                <input
+                  value={editing[item.id]?.price ?? item.price}
+                  onChange={e => onChange(item.id, 'price', e.target.value)}
+                  onBlur={() => onBlur(item.id)}
+                />
+                <input value="kilometers/hour" readOnly />
+                <input value="2500600" readOnly />
+                <input value="This is the description with fifty characters this" readOnly />
+                <span className="dots">⋮</span>
+              </div>
+            ))}
+          </div>
+
+        </main>
       </div>
     </div>
   );
 }
-
-export default PricelistPage;
