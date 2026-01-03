@@ -1,114 +1,86 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
-
-.login-wrapper {
+/* Page */
+.login-page-wrapper {
   min-height: 100vh;
-  width: 100vw;
   background-size: cover;
   background-position: center;
   display: flex;
   flex-direction: column;
+  font-family: Arial, sans-serif;
 }
 
-/* NAVBAR */
-.login-navbar {
-  height: 60px;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: white;
-}
 
-.logo {
-  height: 40px;
-}
 
-.nav-links {
-  display: flex;
-  gap: 25px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.lang-switch img {
-  height: 22px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-/* CENTER CONTENT */
-.login-content {
+/* Center container */
+.login-center {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* LOGIN BOX */
-.login-box {
-  background: white;
+/* Login card */
+.login-card {
   width: 360px;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-}
-
-.login-box h2 {
+  background: #fff;
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   text-align: center;
-  margin-bottom: 25px;
 }
 
-.login-box label {
+.login-card h2 {
+  margin-bottom: 24px;
+  font-size: 26px;
+  color: #ff0000;
+}
+
+/* Form */
+.login-card label {
   display: block;
+  text-align: left;
   margin-bottom: 6px;
   font-weight: bold;
 }
 
-.login-box input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 18px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.login-box button {
+.login-card input {
   width: 100%;
   padding: 12px;
-  background: #007bff;
-  color: white;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 14px;
   border: none;
+  border-radius: 999px;
+  background: #07a31f;
+  color: white;
+  font-size: 16px;
   font-weight: bold;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-.login-box button:hover {
+.login-card button:hover {
   background: #0056b3;
 }
 
-.login-error {
-  color: red;
-  margin-bottom: 15px;
-  text-align: center;
+.error {
+  color: #dc3545;
+  margin-bottom: 12px;
+  font-weight: bold;
 }
 
-/* MOBILE */
+/* Mobile */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
   }
 
-  .login-box {
+  .login-card {
     width: 90%;
+    padding: 24px;
   }
 }

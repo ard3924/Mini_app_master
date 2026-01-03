@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import axiosInstance from '../axiosinterceptor';
 import './Login.css';
 import './Pricelist.css';
+import '../components/navbar.css';
+import Navbar from '../components/Navbar';
 
 function PricelistPage() {
   const [pricelist, setPricelist] = useState([]);
@@ -67,21 +69,18 @@ function PricelistPage() {
 
   return (
     <div className="pricelist-page-wrapper" style={{ backgroundImage: `url('https://storage.123fakturere.no/public/wallpapers/sverige43.jpg')` }}>
-      <header className="login-header">
-        <div className="logo">
-          <img src="https://storage.123fakturere.no/public/icons/diamond.png" alt="Logo" />
-        </div>
-        <div className="header-right">
-          <nav className="nav-links">
-            <a href="#" onClick={() => { localStorage.removeItem('jwt_token'); navigate('/login'); }}>Logout</a>
-          </nav>
+      <Navbar
+        navContent={
+          <a href="#" onClick={() => { localStorage.removeItem('jwt_token'); navigate('/login'); }}>Logout</a>
+        }
+        rightContent={
           <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <span></span>
             <span></span>
             <span></span>
           </div>
-        </div>
-      </header>
+        }
+      />
       {isMenuOpen && (
         <div className="hamburger-menu">
           <a href="#" onClick={() => { localStorage.removeItem('jwt_token'); navigate('/login'); }}>Logout</a>

@@ -70,12 +70,11 @@ body {
 
 /* GREEN BAR */
 .terms-close-btn {
-  width: 90%;
-  max-width: 900px;
+  width: fit-content;
   background-color: #2ca01c;
-  border: none;
+  border: 2px solid #1e7e1e;
   border-radius: 40px;
-  padding: 12px 20px;
+  padding: 12px 24px;
   font-size: 16px;
   font-weight: bold;
   color: white;
@@ -104,15 +103,15 @@ body {
   font-size: 15px;
 }
 
-/* MOBILE ONLY (as required) */
+/* MOBILE VIEW */
 @media (max-width: 600px) {
   .terms-title {
     font-size: 22px;
   }
 
   .terms-close-btn {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 16px;
+    padding: 12px;
   }
 
   .terms-card {

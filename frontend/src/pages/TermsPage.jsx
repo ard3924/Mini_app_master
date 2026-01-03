@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosinterceptor";
 import "./Terms.css";
+import "../components/navbar.css";
+import Navbar from "../components/Navbar";
 
 export default function TermsPage() {
   const [lang, setLang] = useState("se");
@@ -30,39 +32,35 @@ export default function TermsPage() {
           "url(https://storage.123fakturera.se/public/wallpapers/sverige43.jpg)",
       }}
     >
-      {/* NAVBAR */}
-      <header className="terms-navbar">
-        <img
-          src="https://storage.123fakturera.se/public/icons/diamond.png"
-          alt="logo"
-          className="logo"
-        />
-
-        <nav className="terms-nav-links">
-          <span className="active">{texts.terms_title}</span>
-          <span
-            className="link"
-            onClick={() =>
-              alert(texts.login_alert || "Please login")
-            }
-          >
-            {texts.pricelist}
-          </span>
-        </nav>
-
-        <div className="lang-switch">
-          <img
-            src="https://storage.123fakturere.no/public/flags/SE.png"
-            alt="SE"
-            onClick={() => setLang("se")}
-          />
-          <img
-            src="https://storage.123fakturere.no/public/flags/GB.png"
-            alt="EN"
-            onClick={() => setLang("en")}
-          />
-        </div>
-      </header>
+      <Navbar
+        navContent={
+          <>
+            <span className="active">{texts.terms_title}</span>
+            <span
+              className="link"
+              onClick={() =>
+                alert(texts.login_alert || "Please login")
+              }
+            >
+              {texts.pricelist}
+            </span>
+          </>
+        }
+        rightContent={
+          <div className="lang-switch">
+            <img
+              src="https://storage.123fakturere.no/public/flags/SE.png"
+              alt="SE"
+              onClick={() => setLang("se")}
+            />
+            <img
+              src="https://storage.123fakturere.no/public/flags/GB.png"
+              alt="EN"
+              onClick={() => setLang("en")}
+            />
+          </div>
+        }
+      />
 
       {/* TITLE */}
       <h1 className="terms-title">{texts.terms_title}</h1>
