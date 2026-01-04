@@ -16,11 +16,17 @@ app.use('/api/auth', authRoutes);
 app.use('/api/translations', translationRoutes);
 app.use('/api/pricelist', pricelistRoutes);
 
-// for deployment
-app.use(express.static(path.join(__dirname, 'build')));
-app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// // for azure deployment
+// app.use(express.static(path.join(__dirname, 'build')));
+// app.get(/.*/, (req, res) => {
+//   // res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
+
+// for testing in development on render server
+app.get('/', (req, res) => {
+  res.send('Backend API is running');
 });
+
 
 const checkDbConnection = async () => {
   try {
