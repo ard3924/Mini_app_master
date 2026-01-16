@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosinterceptor";
 import "./Terms.css";
-import "../components/navbar.css";
-import Navbar from "../components/Navbar";
 
 export default function TermsPage() {
   const [lang, setLang] = useState("se");
   const [texts, setTexts] = useState({});
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,21 +31,29 @@ export default function TermsPage() {
           "url(https://storage.123fakturera.se/public/wallpapers/sverige43.jpg)",
       }}
     >
-      <Navbar
-        navContent={
-          <>
-            <span className="active">{texts.terms_title}</span>
-            <span
-              className="link"
-              onClick={() =>
-                alert(texts.login_alert || "Please login")
-              }
-            >
-              {texts.pricelist}
-            </span>
-          </>
-        }
-        rightContent={
+      <header className="navbar">
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <img
+          src="https://storage.123fakturere.no/public/icons/diamond.png"
+          alt="Logo"
+          className="navbar-logo"
+        />
+        <nav className="navbar-nav">
+          <span className="active">{texts.terms_title}</span>
+          <span
+            className="link"
+            onClick={() =>
+              alert(texts.login_alert || "Please login")
+            }
+          >
+            {texts.pricelist}
+          </span>
+        </nav>
+        <div className="navbar-right">
           <div className="lang-switch">
             <img
               src="https://storage.123fakturere.no/public/flags/SE.png"
@@ -59,8 +66,21 @@ export default function TermsPage() {
               onClick={() => setLang("en")}
             />
           </div>
-        }
-      />
+        </div>
+      </header>
+      {menuOpen && (
+        <div className="hamburger-menu" onClick={() => setMenuOpen(false)}>
+          <span className="active">{texts.terms_title}</span>
+          <span
+            className="link"
+            onClick={() =>
+              alert(texts.login_alert || "Please login")
+            }
+          >
+            {texts.pricelist}
+          </span>
+        </div>
+      )}
 
       {/* TITLE */}
       <h1 className="terms-title">{texts.terms_title}</h1>
