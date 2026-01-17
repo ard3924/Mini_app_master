@@ -394,7 +394,6 @@ body {
     align-items: center;
   }
 
-  /* Force .nav-left to exist and be visible */
   .nav-left {
     display: flex !important;
     align-items: center !important;
@@ -453,5 +452,41 @@ body {
     width: calc(100% - 40px);
     margin: 120px 20px 0;
     padding: 30px 20px;
+  }
+
+  /* Footer Mobile Optimizations */
+  .page-footer {
+    padding: 15px 20px 20px;
+  }
+
+  .footer-top-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+
+  .footer-brand {
+    font-size: 20px;
+    order: -1; 
+  }
+
+  .footer-links-right {
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-links-right a {
+    font-size: 14px;
+  }
+
+  .footer-divider-line {
+    margin-bottom: 10px;
+  }
+
+  .copyright {
+    font-size: 11px;
   }
 }
