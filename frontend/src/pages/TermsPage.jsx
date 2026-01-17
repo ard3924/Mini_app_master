@@ -87,13 +87,7 @@ export default function TermsPage() {
   }, [lang]);
 
   return (
-    <div
-      className="terms-wrapper"
-      style={{
-        backgroundImage:
-          "url(https://storage.123fakturera.se/public/wallpapers/sverige43.jpg)",
-      }}
-    >
+    <div className="terms-wrapper">
       {/* Navbar */}
       <nav className="navbar">
         <div className="nav-left">
