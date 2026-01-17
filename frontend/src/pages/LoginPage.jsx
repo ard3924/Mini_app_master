@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosinterceptor';
@@ -12,6 +12,20 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // Content Dictionary
   const content = {
@@ -126,11 +140,33 @@ const LoginPage = () => {
           <Link to="#about">{t.nav.about}</Link>
           <Link to="#contact">{t.nav.contact}</Link>
           <Link to="/terms">{t.nav.terms}</Link>
+          <div
+            className="lang-selector"
+            ref={dropdownRef}
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          >
+            <span className="lang-label">{t.nav.currentLang}</span>
+            <img src={currentFlag} alt="flag" className="flag-icon" />
+          </div>
+
+          {isDropdownOpen && (
+            <div className="lang-dropdown">
+              <div className="dropdown-item" onClick={() => handleLangSwitch('se')}>
+                <span>Svenska</span>
+                <img src={assets.flagSE} alt="SE" className="flag-icon" />
+              </div>
+              <div className="dropdown-item" onClick={() => handleLangSwitch('en')}>
+                <span>English</span>
+                <img src={assets.flagGB} alt="GB" className="flag-icon" />
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="nav-right">
           <div
             className="lang-selector"
+            ref={dropdownRef}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             <span className="lang-label">{t.nav.currentLang}</span>
