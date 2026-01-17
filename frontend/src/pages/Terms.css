@@ -1,4 +1,6 @@
-/* RESET */
+/* =========================
+   RESET + VIEWPORT FIX
+========================= */
 * {
   box-sizing: border-box;
 }
@@ -10,68 +12,47 @@ body {
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+
+  /* Mobile-safe viewport */
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
+/* =========================
+   FIXED BACKGROUND (MOBILE SAFE)
+========================= */
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+
   background-image: url(https://storage.123fakturera.se/public/wallpapers/sverige43.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
   z-index: -1;
 }
 
-
-/* BACKGROUND */
+/* =========================
+   PAGE WRAPPER
+========================= */
 .terms-wrapper {
-  min-height: 100vh;
-  width: 100vw;
+  min-height: 100dvh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 100px;
+  position: relative;
 }
 
-
-/* NAVBAR */
-.terms-navbar {
-  width: 100%;
-  padding: 12px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  height: 40px;
-}
-
-.terms-nav-links {
-  display: flex;
-  gap: 30px;
-  font-weight: 600;
-  color: white;
-}
-
-.terms-nav-links .link {
-  cursor: pointer;
-  opacity: 0.85;
-}
-
-.terms-nav-links .active {
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-.lang-switch img {
-  height: 22px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-/* TITLE */
+/* =========================
+   TITLE
+========================= */
 .terms-title {
   margin-top: 20px;
   margin-bottom: 12px;
@@ -80,7 +61,9 @@ body::before {
   font-weight: bold;
 }
 
-/* GREEN BAR */
+/* =========================
+   CLOSE BUTTON
+========================= */
 .terms-close-btn {
   width: fit-content;
   background-color: #2ca01c;
@@ -94,7 +77,9 @@ body::before {
   margin-bottom: 25px;
 }
 
-/* CONTENT CARD */
+/* =========================
+   CONTENT CARD
+========================= */
 .terms-card {
   background: white;
   width: 80%;
@@ -105,7 +90,9 @@ body::before {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* TEXT */
+/* =========================
+   TEXT
+========================= */
 .terms-text {
   white-space: pre-line;
   color: #555;
@@ -116,23 +103,9 @@ body::before {
   font-family: "Open Sans", sans-serif !important;
 }
 
-/* MOBILE VIEW */
-@media (max-width: 600px) {
-  .terms-title {
-    font-size: 22px;
-  }
-
-  .terms-close-btn {
-    font-size: 16px;
-    padding: 12px;
-  }
-
-  .terms-card {
-    padding: 20px;
-  }
-}
-
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -142,9 +115,6 @@ body::before {
   margin-top: 20px;
 
   background: transparent !important;
-  background-color: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
   box-shadow: none !important;
   border: none !important;
 
@@ -161,7 +131,6 @@ body::before {
 
 .nav-logo {
   height: 40px;
-  width: auto;
   filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
   margin-left: 100px;
 }
@@ -184,56 +153,30 @@ body::before {
   text-decoration: underline;
 }
 
-/* Language Selector */
+/* =========================
+   LANGUAGE SELECTOR
+========================= */
 .nav-right {
+  display: none;
   position: relative;
-  display: none; /* Hide on desktop */
 }
 
-.nav-center .lang-selector {
+.lang-selector {
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
   color: white;
   font-weight: 600;
-  font-size: 16px;
-  text-shadow: 0px 1px 3px rgba(0,0,0,0.6);
-  position: relative;
-}
-
-.nav-right .lang-selector {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  color: white;
-  font-weight: 600;
-  font-size: 16px;
-  text-shadow: 0px 1px 3px rgba(0,0,0,0.6);
 }
 
 .flag-icon {
   width: 24px;
-  height: auto;
   border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 /* Dropdown */
-.nav-center .lang-dropdown {
-  position: absolute;
-  top: 30px;
-  right: 0;
-  background-color: white;
-  border-radius: 6px;
-  padding: 8px;
-  width: 150px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 20;
-}
-
-.nav-right .lang-dropdown {
+.lang-dropdown {
   position: absolute;
   top: 30px;
   right: 0;
@@ -248,11 +191,9 @@ body::before {
 .dropdown-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 8px 10px;
   cursor: pointer;
   border-radius: 4px;
-  color: #333;
   font-size: 14px;
 }
 
@@ -260,60 +201,43 @@ body::before {
   background-color: #f5f5f5;
 }
 
-/* HAMBURGER (Global Base Styles) */
+/* =========================
+   HAMBURGER
+========================= */
 .hamburger {
-  display: none; 
+  display: none;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
   width: 30px;
   height: 24px;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
-  margin: 0;
 }
 
 .hamburger span {
   width: 100%;
   height: 3px;
   background-color: white;
-  display: block;
   border-radius: 2px;
 }
 
-/* Mobile Menu Overlay */
+/* =========================
+   MOBILE MENU
+========================= */
 .mobile-menu {
   position: absolute;
   top: calc(100% + 10px);
   right: 20px;
-  left: auto;
-  width: auto;
   min-width: 220px;
   background-color: white;
   z-index: 15;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
   border-radius: 12px;
-  overflow: hidden;
-  animation: slideDown 0.2s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .mobile-menu-content {
   display: flex;
   flex-direction: column;
-  padding: 12px 0;
 }
 
 .mobile-menu-content a {
@@ -321,78 +245,38 @@ body::before {
   text-decoration: none;
   font-size: 16px;
   padding: 12px 20px;
-  border-bottom: none;
-  transition: background-color 0.2s ease;
 }
 
 .mobile-menu-content a:hover {
   background-color: #f5f5f5;
 }
 
-.mobile-menu-content a:last-child {
-  border-bottom: none;
-}
-
+/* =========================
+   MOBILE FIXES
+========================= */
 @media (max-width: 768px) {
-  /* Navbar Layout */
   .navbar {
-    padding: 15px 20px !important;
-    justify-content: space-between !important;
-    height: auto;
-    align-items: center;
+    padding: 15px 20px;
   }
 
-  /* Force .nav-left to exist and be visible */
-  .nav-left {
-    display: flex !important;
-    align-items: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: auto !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  /* Hide Desktop Elements */
   .nav-logo,
   .nav-center {
-    display: none !important;
+    display: none;
   }
 
-  /* Show Mobile Right (Language) */
   .nav-right {
-    display: flex !important;
-    position: static !important;
-    align-items: center;
-    gap: 15px;
+    display: flex;
   }
 
-  /* Ensure hamburger is visible on mobile */
   .hamburger {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 30px !important;
-    height: 24px !important;
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    position: relative;
-    z-index: 3000;
-    opacity: 1 !important;
-    visibility: visible !important;
-    order: -1;
+    display: flex;
   }
 
-  /* Hamburger Lines */
-  .hamburger span {
-    display: block !important;
-    width: 100% !important;
-    height: 3px !important;
-    background-color: white !important;
-    border-radius: 2px;
-    flex-shrink: 0;
+  .terms-title {
+    font-size: 22px;
+  }
+
+  .terms-card {
+    padding: 20px;
   }
 }
