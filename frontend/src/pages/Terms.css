@@ -108,6 +108,10 @@ body {
 
 /* MOBILE VIEW */
 @media (max-width: 600px) {
+  .terms-wrapper {
+    background-attachment: scroll;
+  }
+
   .terms-title {
     font-size: 22px;
   }
