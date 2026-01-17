@@ -69,23 +69,9 @@ export default function PricelistPage() {
 
       {menuOpen && (
         <div className="mobile-menu" onClick={() => setMenuOpen(false)}>
-          <div className="user-info-mobile" onClick={(e) => e.stopPropagation()}>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-              alt="user"
-              width="42"
-              height="42"
-              className="avatar"
-            />
-            <div>
-              <div className="username">John Andre</div>
-              <div className="company">Storfjord AS</div>
-            </div>
-          </div>
-
           <div className="menu-items-mobile" onClick={(e) => e.stopPropagation()}>
             {[
-              'Price List',
+              'Invoices', 'Customers', 'My Business', 'Invoice Journal', 'Price List', 'Multiple Invoicing', 'Unpaid Invoices', 'Offer', 'Inventory Control', 'Member Invoicing', 'Import/Export'
             ].map(item => (
               <div
                 key={item}
@@ -115,29 +101,43 @@ export default function PricelistPage() {
 
         {/* SIDEBAR */}
         <aside className="sidebar">
-          <h4>Menu</h4>
+  <div className="sidebar-title">Menu</div>
 
-          {[
-            'Price List',
-          ].map(item => (
-            <div
-              key={item}
-              className={`menu-item ${item === 'Price List' ? 'active' : ''}`}
-            >
-              {item}
-            </div>
-          ))}
+  {[
+    { label: 'Invoices', icon: '📄' },
+    { label: 'Customers', icon: '👥' },
+    { label: 'My Business', icon: '⚙️' },
+    { label: 'Invoice Journal', icon: '📘' },
+    { label: 'Price List', icon: '💰' },
+    { label: 'Multiple Invoicing', icon: '🧾' },
+    { label: 'Unpaid Invoices', icon: '❌' },
+    { label: 'Offer', icon: '🏷️' },
+    { label: 'Inventory Control', icon: '📦' },
+    { label: 'Member Invoicing', icon: '👤' },
+    { label: 'Import/Export', icon: '⬆️' },
+  ].map(item => (
+    <div
+      key={item.label}
+      className={`sidebar-item ${
+        item.label === 'Price List' ? 'active' : ''
+      }`}
+    >
+      <span className="icon">{item.icon}</span>
+      <span>{item.label}</span>
+    </div>
+  ))}
 
-          <div
-            className="menu-item logout"
-            onClick={() => {
-              localStorage.removeItem('jwt_token');
-              navigate('/login');
-            }}
-          >
-            Log out
-          </div>
-        </aside>
+  <div
+    className="sidebar-item logout"
+    onClick={() => {
+      localStorage.removeItem('jwt_token');
+      navigate('/login');
+    }}
+  >
+    <span className="icon">🚪</span>
+    <span>Log out</span>
+  </div>
+</aside>
 
         {/* MAIN CONTENT */}
         <main className="content">
@@ -145,14 +145,14 @@ export default function PricelistPage() {
           {/* SEARCH + ACTIONS */}
           <div className="toolbar">
             <div className="search-group">
-              <input placeholder="Search Article No..." />
-              <input placeholder="Search Product..." />
+              <input placeholder="Search Article No........." />
+              <input placeholder="Search Product........." />
             </div>
 
             <div className="actions">
-              <button className="pill green">New Product</button>
-              <button className="pill">Print List</button>
-              <button className="pill toggle">Advanced mode</button>
+              <button className="pill green">➕ New Product</button>
+              <button className="pill">🖨️ Print List</button>
+              <button className="pill toggle">🔄 Advanced mode</button>
             </div>
           </div>
 
