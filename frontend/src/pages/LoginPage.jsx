@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosinterceptor';
 
 const LoginPage = () => {
-  const [lang, setLang] = useState('se'); // 'se' for Swedish, 'en' for English
+  const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'se'); // 'se' for Swedish, 'en' for English
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [username, setUsername] = useState('');
@@ -13,10 +13,14 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
+  const dropdownRefRight = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        (dropdownRef.current && !dropdownRef.current.contains(event.target)) &&
+        (dropdownRefRight.current && !dropdownRefRight.current.contains(event.target))
+      ) {
         setIsDropdownOpen(false);
       }
     };
@@ -105,6 +109,7 @@ const LoginPage = () => {
 
   const handleLangSwitch = (selectedLang) => {
     setLang(selectedLang);
+    try { localStorage.setItem('lang', selectedLang); } catch (e) { }
     setIsDropdownOpen(false);
   };
 
@@ -140,51 +145,53 @@ const LoginPage = () => {
           <Link to="#about">{t.nav.about}</Link>
           <Link to="#contact">{t.nav.contact}</Link>
           <Link to="/terms">{t.nav.terms}</Link>
-          <div
-            className="lang-selector"
-            ref={dropdownRef}
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          >
-            <span className="lang-label">{t.nav.currentLang}</span>
-            <img src={currentFlag} alt="flag" className="flag-icon" />
-          </div>
-
-          {isDropdownOpen && (
-            <div className="lang-dropdown">
-              <div className="dropdown-item" onClick={() => handleLangSwitch('se')}>
-                <span>Svenska</span>
-                <img src={assets.flagSE} alt="SE" className="flag-icon" />
-              </div>
-              <div className="dropdown-item" onClick={() => handleLangSwitch('en')}>
-                <span>English</span>
-                <img src={assets.flagGB} alt="GB" className="flag-icon" />
-              </div>
+          <div ref={dropdownRef}>
+            <div
+              className="lang-selector"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <span className="lang-label">{t.nav.currentLang}</span>
+              <img src={currentFlag} alt="flag" className="flag-icon" />
             </div>
-          )}
+
+            {isDropdownOpen && (
+              <div className="lang-dropdown">
+                <div className="dropdown-item" onClick={() => handleLangSwitch('se')}>
+                  <span>Svenska</span>
+                  <img src={assets.flagSE} alt="SE" className="flag-icon" />
+                </div>
+                <div className="dropdown-item" onClick={() => handleLangSwitch('en')}>
+                  <span>English</span>
+                  <img src={assets.flagGB} alt="GB" className="flag-icon" />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="nav-right">
-          <div
-            className="lang-selector"
-            ref={dropdownRef}
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          >
-            <span className="lang-label">{t.nav.currentLang}</span>
-            <img src={currentFlag} alt="flag" className="flag-icon" />
-          </div>
-
-          {isDropdownOpen && (
-            <div className="lang-dropdown">
-              <div className="dropdown-item" onClick={() => handleLangSwitch('se')}>
-                <span>Svenska</span>
-                <img src={assets.flagSE} alt="SE" className="flag-icon" />
-              </div>
-              <div className="dropdown-item" onClick={() => handleLangSwitch('en')}>
-                <span>English</span>
-                <img src={assets.flagGB} alt="GB" className="flag-icon" />
-              </div>
+          <div ref={dropdownRefRight}>
+            <div
+              className="lang-selector"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <span className="lang-label">{t.nav.currentLang}</span>
+              <img src={currentFlag} alt="flag" className="flag-icon" />
             </div>
-          )}
+
+            {isDropdownOpen && (
+              <div className="lang-dropdown">
+                <div className="dropdown-item" onClick={() => handleLangSwitch('se')}>
+                  <span>Svenska</span>
+                  <img src={assets.flagSE} alt="SE" className="flag-icon" />
+                </div>
+                <div className="dropdown-item" onClick={() => handleLangSwitch('en')}>
+                  <span>English</span>
+                  <img src={assets.flagGB} alt="GB" className="flag-icon" />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Mobile Menu */}
