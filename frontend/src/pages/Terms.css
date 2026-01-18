@@ -1,14 +1,8 @@
-/* =========================
-   RESET + VIEWPORT FIX
-========================= */
 * {
   box-sizing: border-box;
 }
 
 html {
-  /* SAFETY MASK: Matches the sky blue of your background image.
-     If the image lags during a mobile scroll, this color shows
-     instead of a white glitch. */
   background-color: #5ea8d6;
 }
 
@@ -20,16 +14,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
   overflow-y: auto;
-
-  /* Use standard 100vh as fallback */
   height: 100vh;
-  /* Use the custom variable calculated in React */
   height: calc(var(--vh, 1vh) * 100);
 }
 
-/* =========================
-   FIXED BACKGROUND (MOBILE SAFE)
-========================= */
 body::before {
   content: "";
   position: fixed;
@@ -50,11 +38,7 @@ body::before {
   z-index: -1;
 }
 
-/* =========================
-   PAGE WRAPPER
-========================= */
 .terms-wrapper {
-  /* Use custom vh here too */
   min-height: 100vh; 
   min-height: calc(var(--vh, 1vh) * 100);
   
@@ -64,7 +48,7 @@ body::before {
   align-items: center;
   padding-top: 100px;
   position: relative;
-}======================= */
+}
 .terms-title {
   margin-top: 20px;
   margin-bottom: 12px;
@@ -73,9 +57,6 @@ body::before {
   font-weight: bold;
 }
 
-/* =========================
-   CLOSE BUTTON
-========================= */
 .terms-close-btn {
   width: fit-content;
   background-color: #2ca01c;
@@ -89,9 +70,7 @@ body::before {
   margin-bottom: 25px;
 }
 
-/* =========================
-   CONTENT CARD
-========================= */
+
 .terms-card {
   background: white;
   width: 80%;
@@ -102,9 +81,7 @@ body::before {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* =========================
-   TEXT
-========================= */
+
 .terms-text {
   white-space: pre-line;
   color: #555;
@@ -115,9 +92,6 @@ body::before {
   font-family: "Open Sans", sans-serif !important;
 }
 
-/* =========================
-   NAVBAR
-========================= */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -165,9 +139,6 @@ body::before {
   text-decoration: underline;
 }
 
-/* =========================
-   LANGUAGE SELECTOR
-========================= */
 .nav-right {
   display: none;
   position: relative;
@@ -187,7 +158,6 @@ body::before {
   border-radius: 2px;
 }
 
-/* Dropdown */
 .lang-dropdown {
   position: absolute;
   top: 30px;
@@ -213,9 +183,6 @@ body::before {
   background-color: #f5f5f5;
 }
 
-/* =========================
-   HAMBURGER
-========================= */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -233,9 +200,6 @@ body::before {
   border-radius: 2px;
 }
 
-/* =========================
-   MOBILE MENU
-========================= */
 .mobile-menu {
   position: absolute;
   top: calc(100% + 10px);
@@ -263,9 +227,6 @@ body::before {
   background-color: #f5f5f5;
 }
 
-/* =========================
-   MOBILE FIXES
-========================= */
 @media (max-width: 768px) {
   .navbar {
     padding: 15px 20px;
@@ -286,6 +247,7 @@ body::before {
 
   .terms-title {
     font-size: 22px;
+    color : white;
   }
 
   .terms-card {

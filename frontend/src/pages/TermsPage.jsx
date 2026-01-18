@@ -15,16 +15,11 @@ export default function TermsPage() {
   // --- MOBILE VIEWPORT FIX ---
   useEffect(() => {
     const setViewportHeight = () => {
-      // Calculate 1% of the actual viewport height
       const vh = window.innerHeight * 0.01;
-      // Set the value in the --vh custom property to the root of the document
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     };
 
-    // Set initially
     setViewportHeight();
-
-    // Reset on resize (handles screen rotation and address bar appearing/disappearing)
     window.addEventListener('resize', setViewportHeight);
 
     return () => {
