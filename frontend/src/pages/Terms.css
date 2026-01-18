@@ -19,11 +19,12 @@ body {
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  overflow-y: auto;
 
   /* Use standard 100vh as fallback */
-  min-height: 100vh;
+  height: 100vh;
   /* Use the custom variable calculated in React */
-  min-height: calc(var(--vh, 1vh) * 100);
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 /* =========================
@@ -34,28 +35,18 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  /* Anchor to bottom/right to force stretch */
   bottom: 0;
   right: 0;
   
   width: 100%;
+  height: 100%;
   
-  /* Fallback height */
-  height: 100vh;
-  /* Precise height based on JS calculation */
-  height: calc(var(--vh, 1vh) * 100);
-
   background-image: url(https://storage.123fakturera.se/public/wallpapers/sverige43.jpg);
   background-size: cover;
-  
-  /* FIXED: Changed from 'center' to 'center top'.
-     This stops the image from jumping up/down when the address bar moves. */
-  background-position: center top; 
+  background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   
-  /* Optimizes rendering on mobile */
-  will-change: transform; 
-
   z-index: -1;
 }
 
@@ -73,11 +64,7 @@ body::before {
   align-items: center;
   padding-top: 100px;
   position: relative;
-}
-
-/* =========================
-   TITLE
-========================= */
+}======================= */
 .terms-title {
   margin-top: 20px;
   margin-bottom: 12px;
