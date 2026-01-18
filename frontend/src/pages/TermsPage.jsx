@@ -12,6 +12,26 @@ export default function TermsPage() {
   const dropdownRef = useRef(null);
   const dropdownRefRight = useRef(null);
 
+  // --- MOBILE VIEWPORT FIX ---
+  useEffect(() => {
+    const setViewportHeight = () => {
+      // Calculate 1% of the actual viewport height
+      const vh = window.innerHeight * 0.01;
+      // Set the value in the --vh custom property to the root of the document
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    // Set initially
+    setViewportHeight();
+
+    // Reset on resize (handles screen rotation and address bar appearing/disappearing)
+    window.addEventListener('resize', setViewportHeight);
+
+    return () => {
+      window.removeEventListener('resize', setViewportHeight);
+    };
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
