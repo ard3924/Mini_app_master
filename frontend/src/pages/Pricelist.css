@@ -55,7 +55,7 @@ header.topbar {
   top: 80px;
   left: 0;
   width: 260px;
-  height: calc(100vh - 80px);
+  height: calc(var(--vh, 1vh) * 100 - 80px);
   background: #f8fbff;
   border-right: 1px solid #e4eef8;
   padding: 18px 12px;

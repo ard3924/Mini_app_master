@@ -10,14 +10,24 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Page Container */
-.page-container {
+/* Background Layer */
+.bg-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: calc(var(--vh, 1vh) * 100);
+  height: calc(var(--vh, 1vh) * 100);
   background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Page Container */
+.page-container {
+  width: 100%;
+  min-height: calc(var(--vh, 1vh) * 100);
   display: flex;
   flex-direction: column;
   position: relative;

@@ -126,13 +126,15 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="page-container">
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="nav-left">
-          <img src={assets.logo} alt="Diamond Logo" className="nav-logo" />
-          <button className="hamburger" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            <span></span>
+    <>
+      <div className="bg-layer"></div>
+      <div className="page-container">
+        {/* Navbar */}
+        <nav className="navbar">
+          <div className="nav-left">
+            <img src={assets.logo} alt="Diamond Logo" className="nav-logo" />
+            <button className="hamburger" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              <span></span>
             <span></span>
             <span></span>
           </button>
@@ -266,7 +268,8 @@ const LoginPage = () => {
             <span className="copyright">{t.footer.copyright}</span>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 };
 export default LoginPage;

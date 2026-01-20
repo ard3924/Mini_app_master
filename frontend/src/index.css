@@ -1,0 +1,45 @@
+/* ============================================
+   GLOBAL MOBILE VIEWPORT FIX
+   ============================================
+   This fixes the mobile browser viewport jump issue when
+   the address bar hide/show. The --vh CSS variable is
+   set dynamically in App.jsx using window.innerHeight.
+*/
+
+:root {
+  --vh: 1vh;
+}
+
+html {
+  /* Prevent default browser behavior that causes jump */
+  height: 100%;
+  /* Allow the vh variable to control height on mobile */
+  background-color: #fff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* Use CSS variable instead of 100vh */
+  min-height: calc(var(--vh, 1vh) * 100);
+  /* Prevent body from scrolling, let children handle it */
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Prevent momentum scroll behavior issues */
+  -webkit-font-smoothing: antialiased;
+  -webkit-touch-callout: none;
+}
+
+/* Ensure fixed elements respect viewport */
+#root {
+  width: 100%;
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
+/* Reset default scrollbar behavior on iOS */
+input,
+textarea,
+select {
+  font-size: 16px;
+}
