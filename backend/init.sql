@@ -154,7 +154,7 @@ Ha en trevlig dag!'),
 ('terms', 'en', 'login_alert', 'Please login to access the pricelist.'),
 ('terms', 'se', 'login_alert', 'Vänligen logga in för att komma åt prislistan.');
 
-INSERT INTO users (username, password) VALUES ('admin', '$2a$10$examplehashedpassword');
+INSERT INTO users (username, password) VALUES ('admin', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 
 INSERT INTO pricelist (product_service, in_price, price, quantity, total) VALUES
 ('Product 1', 10.00, 15.00, 1, 15.00),
